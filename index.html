@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="all">
+        <h1>colors square</h1>
+        <p>поймай квадрат нужного цвета</p>
+        <p>словишь не правильный квадрат - 1 очко</p>
+        <div id="gameArea"></div>
+        <div id="score">score:0</div>
+    </div>
+    <script>
+        const gameArea = document.getElementById("gameArea")
+        const scoreDisplay = document.getElementById("score")
+        let score = 0
+        const colors = ["red","green","blue","yellow","purple","orange"]
+        const targetColor = "green" 
+        function create(){
+            gameArea.innerHTML = ""
+            for(let i = 0 ; i < 20; i++){
+                const colorBox = document.createElement("div")
+                colorBox.classList.add("colorBox")
+                const color = colors[Math.floor(Math.random() * colors.length)]
+                colorBox.style.backgroundColor = color
+                colorBox.addEventListener("click",() => Click(color))
+                gameArea.appendChild(colorBox)
+            }
+        }
+        function Click(color){
+            if(targetColor === color){
+                score++
+            }
+            else{
+                score = Math.max(0,score - 1)
+            }
+            scoreDisplay.textContent = `score: ${score}`
+            create()
+        }
+        create()
+    </script>
+</body>
+</html>
